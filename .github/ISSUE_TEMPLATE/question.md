@@ -4,7 +4,7 @@ about: Ask what ever you want
 labels: question
 ---
 
-<!-- Note: Please follow the template to open a new issue, otherwise your question will probably be ignored. -->
+<!-- NOTE: Please maintain all sections, otherwise the issue will be automatically closed :) -->
 
 ## Checklist
 
@@ -16,4 +16,4 @@ labels: question
 - [ ] My question is based on the latest code of `master` branch.
 
 ## Description
-<!-- Please describe your question in detial. -->
+<!-- Please describe your question in detail. -->

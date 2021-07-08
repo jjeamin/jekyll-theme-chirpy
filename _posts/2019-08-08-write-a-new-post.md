@@ -8,7 +8,7 @@ tags: [writing]
 
 ## Naming and Path
 
-Create a new file named `YYYY-MM-DD-TITLE.EXTENSION` and put it in the `_post/` of the root directory. Please note that the `EXTENSION` must be one of `md` and `markdown`. From `v2.4.1`, you can create sub-directories under `_posts/` to categorize posts.
+Create a new file named `YYYY-MM-DD-TITLE.EXTENSION` and put it in the `_posts/` of the root directory. Please note that the `EXTENSION` must be one of `md` and `markdown`.
 
 ## Front Matter
 
@@ -68,14 +68,108 @@ math: true
 ---
 ```
 
-## Preview Image
+## Mermaid
 
-If you want to add an image to the top of the post contents, specify the url for the image by:
+[**Mermaid**](https://github.com/mermaid-js/mermaid) is a great diagrams generation tool. To enable it on your post, add the following to the YAML block:
+
+```yml
+---
+mermaid: true
+---
+```
+
+Then you can use it like other markdown language: surround the graph code with ```` ```mermaid ```` and ```` ``` ````.
+
+## Images
+
+### Preview image
+
+If you want to add an image to the top of the post contents, specify the attribute `src`, `width`, `height` and `alt` for the image:
 
 ```yaml
 ---
-image: /path/to/image-file
+image:
+  src: /path/to/image/file
+  width: 1000   # in pixels
+  height: 400   # in pixels
+  alt: image alternative text
 ---
+```
+
+Except for `alt`, all other options are necessary, especially the `width` and `height`, which are related to user experience and web page loading performance. Later section ["Image size"](#image-size) will also mention this.
+
+
+### Image caption
+
+Add italics to the next line of an image，then it will become the caption and appear at the bottom of the image:
+
+```markdown
+![img-description](/path/to/image)
+_Image Caption_
+```
+
+### Image size
+
+In order to prevent the page content layout from shifting when the image is loaded, we should set the width and height for each image:
+
+```markdown
+![Desktop View](/assets/img/sample/mockup.png){: width="700" height="400" }
+```
+
+### Image position
+
+By default, the image is centered, but you can specify the position by using one of class `normal` , `left` and `right`. For example:
+
+- **Normal position**
+
+  Image will be left aligned in below sample:
+
+  ```markdown
+  ![Desktop View](/assets/img/sample/mockup.png){: .normal }
+  ```
+
+- **Float to the left**
+
+  ```markdown
+  ![Desktop View](/assets/img/sample/mockup.png){: .left }
+  ```
+
+- **Float to the right**
+
+  ```markdown
+  ![Desktop View](/assets/img/sample/mockup.png){: .right }
+  ```
+
+> **Limitation**: Once you specify the position of an image, it is forbidden to add the image caption.
+
+### Image shadow
+
+The screenshots of the program window can be considered to show the shadow effect, and the shadow will be visible in the `light` mode:
+
+```markdown
+![Desktop View](/assets/img/sample/mockup.png){: .shadow }
+```
+
+### CDN URL
+
+If you host the images on the CDN, you can save the time of repeatedly writing the CDN url by assigning the variable `img_cdn` of `_config.yml` file:
+
+```yaml
+img_cdn: https://cdn.com
+```
+
+Once `img_cdn` is assigned, the CDN url will be added to the path of all images (images of site avatar and posts) starting with `/`.
+
+For instance, when using images:
+
+```markdown
+![The flower](/path/to/flower.png)
+```
+
+The parsing result will automatically add the CDN prefix `https://cdn.com` before the image path:
+
+```html
+<img src="https://cdn.com/path/to/flower.png" alt="The flower">
 ```
 
 ## Pinned Posts
@@ -90,7 +184,7 @@ pin: true
 
 ## Code Block
 
-Markdown symbols <code class="highlighter-rouge">```</code> can easily create a code block as following examples.
+Markdown symbols ```` ``` ```` can easily create a code block as following examples.
 
 ```
 This is a common code snippet, without syntax highlight and line number.
@@ -98,7 +192,7 @@ This is a common code snippet, without syntax highlight and line number.
 
 ## Specific Language
 
-Using <code class="highlighter-rouge">```language</code> you will get code snippets with line numbers and syntax highlight.
+Using ```` ```language ```` you will get code snippets with line numbers and syntax highlight.
 
 > **Note**: The Jekyll style `{% raw %}{%{% endraw %} highlight LANGUAGE {% raw %}%}{% endraw %}` or `{% raw %}{%{% endraw %} highlight LANGUAGE linenos {% raw %}%}{% endraw %}` are not allowed to be used in this theme !
 
